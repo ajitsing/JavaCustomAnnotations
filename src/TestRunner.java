@@ -5,9 +5,13 @@ public class TestRunner {
     public void runTests(Object test) throws InvocationTargetException, IllegalAccessException {
         Method[] allMethods = test.getClass().getDeclaredMethods();
         for (Method method : allMethods) {
-            if (method.isAnnotationPresent(MyTest.class)) {
-                method.invoke(test);
-            }
+            executeMethod(test, method);
+        }
+    }
+
+    private void executeMethod(Object test, Method method) throws InvocationTargetException, IllegalAccessException {
+        if (method.isAnnotationPresent(MyTest.class)) {
+            method.invoke(test);
         }
     }
 }
